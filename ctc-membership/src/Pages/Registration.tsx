@@ -10,7 +10,8 @@ import {
 import Personal from './Personal';
 import Contact from './Contact';
 import Member from './Member';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useAuth } from '../AuthProvider';
 
 export default function Registration() {
 
@@ -20,6 +21,13 @@ export default function Registration() {
     e.preventDefault();
     navigate('/');
   };
+
+  const { user } = useAuth();
+
+  // Redirect to sign-in page if not authenticated
+  if (!user) {
+      return <Navigate to="/" />;
+  }
 
   return (
     <Container maxWidth="lg">

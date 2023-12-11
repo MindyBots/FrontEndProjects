@@ -1,9 +1,18 @@
 import React from 'react';
 import { Container, Grid, Card, CardContent, Typography, Button} from '@mui/material';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useAuth } from './AuthProvider';
 
 
 const LandingPage: React.FC = () => {
+
+  const { user } = useAuth();
+
+  // Redirect to sign-in page if not authenticated
+  if (!user) {
+      return <Navigate to="/" />;
+  }
+
   return (
     <Container>
         <Grid container spacing={2} justifyContent="center" alignItems="center" style={{ height: '100vh' }}>

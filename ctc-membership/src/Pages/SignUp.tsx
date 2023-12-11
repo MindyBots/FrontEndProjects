@@ -13,8 +13,7 @@ import {
   //FormControlLabel,
   FormControl,
   Typography,
-  Container,
-  Stack,
+  Container
 } from "@mui/material";
 import PasswordField from "../components/PasswordField";
 import CopyRightCTC from "../components/CopyRightCTC";
@@ -127,42 +126,47 @@ export default function SignUp() {
               //noValidate
               sx={{ mt: 1, p: 2, width: {md:'800px'} }}
             >
-              <Stack spacing={1} direction={"row"} margin={1}>
-                <TextField
-                  required
-                  id="firstName"
-                  label="First Name"
-                  name="firstName"
-                  autoComplete="firstName"
-                  fullWidth
-                  margin='normal'
-                />
-                <TextField
-                  required
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lastName"
-                  fullWidth
-                  margin='normal'
-                />
-              </Stack>
-
-              <Stack spacing={1} direction={"column"} margin={1} marginTop={3}>
-                <EmailField setEmail={setEmail} />
-                <br></br>
-                <PasswordField
-                  id="password"
-                  label="Password"
-                  passwordValue={setPassword}
-                />
-                <PasswordField
-                  id="confirmpassword"
-                  label="Confirm Password"
-                  passwordValue={setConfirmPassword}             
-                />
-              </Stack>
-
+              <Grid container spacing={1}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="firstName"
+                    label="First Name"
+                    name="firstName"
+                    autoComplete="firstName"
+                    fullWidth
+                    margin='normal'
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="lastName"
+                    fullWidth
+                    margin='normal'
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <EmailField setEmail={setEmail} />
+                </Grid>
+                <Grid item xs={12} sx={{my:2}}>
+                  <PasswordField
+                    id="password"
+                    label="Password"
+                    passwordValue={setPassword}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <PasswordField
+                    id="confirmpassword"
+                    label="Confirm Password"
+                    passwordValue={setConfirmPassword}             
+                  />
+                </Grid>
+              </Grid>
               {error && (
                 <FormControl margin="normal" fullWidth>
                   <Typography variant="body2" color="error" align="center">
