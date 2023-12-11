@@ -8,8 +8,9 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth';
+//import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const firebaseConfig = {
@@ -57,15 +58,21 @@ const theme = createTheme({
 export default function Header(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [isFirstButton, setIsFirstButton] = useState(true);
   const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const handleClick = () => {
+    // Toggle the state when the button is clicked
+    setIsFirstButton(!isFirstButton);
+  };
+
   const [user, setUser] = useState<any>(null);
-  const [email] = useState('');
-  const [password] = useState('');
+  //const [email] = useState('');
+  //const [password] = useState('');
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -108,7 +115,7 @@ export default function Header(props: Props) {
     }
   };
 
-  const handleSignUp = async () => {
+  {/*const handleSignUp = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
@@ -116,13 +123,17 @@ export default function Header(props: Props) {
     } catch (error : any) {
       console.error('Error signing up:', error.message);
     }
+  };*/}
+
+  const handleBothClicks = () => {
+      handleClick();
   };
 
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" position="absolute" sx={{backgroundImage: 'url("https://test.chicagotamilcatholics.org/wp-content/uploads/2021/12/footer-bg-im-21.jpg")'}}>
+      <AppBar component="nav" position="fixed" sx={{backgroundImage: 'url("https://test.chicagotamilcatholics.org/wp-content/uploads/2021/12/footer-bg-im-21.jpg")'}}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -151,8 +162,15 @@ export default function Header(props: Props) {
                       </>
                     ) : (
                       <>
-                        <Button variant="contained" color="success" onClick={handleSignUp} href='/signUp' size='small' sx={{my:1}}>
-                          SignUp
+                        <Button
+                          component={Link}
+                          to={isFirstButton ? '/signUp' : '/'}
+                          variant="contained"
+                          color="success"
+                          onClick={handleBothClicks}
+                          sx={{ my: 2.5 }}
+                        >
+                          {isFirstButton ? 'SignUp' : 'SignIn'}
                         </Button>
                       </>
                     )}
@@ -186,8 +204,15 @@ export default function Header(props: Props) {
                     </>
                   ) : (
                     <>
-                      <Button variant="contained" color="success" onClick={handleSignUp} sx={{my:2.5}} href='/signUp'>
-                        SignUp
+                      <Button
+                        component={Link}
+                        to={isFirstButton ? '/signUp' : '/'}
+                        variant="contained"
+                        color="success"
+                        onClick={handleBothClicks}
+                        sx={{ my: 2.5 }}
+                      >
+                        {isFirstButton ? 'SignUp' : 'SignIn'}
                       </Button>
                     </>
                   )}
