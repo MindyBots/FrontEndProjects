@@ -9,6 +9,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 
 const firebaseConfig = {
@@ -56,6 +57,7 @@ const theme = createTheme({
 export default function Header(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -100,18 +102,19 @@ export default function Header(props: Props) {
       await signOut(auth);
       setUser(null);
       console.log('Signed out:', user);
+      navigate('/');
     } catch (error : any) {
       console.error('Error logging out:', error.message);
     }
   };
 
-  const handleSignIn = async () => {
+  const handleSignUp = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
 
     } catch (error : any) {
-      console.error('Error signing in:', error.message);
+      console.error('Error signing up:', error.message);
     }
   };
 
@@ -148,8 +151,8 @@ export default function Header(props: Props) {
                       </>
                     ) : (
                       <>
-                        <Button variant="contained" color="success" onClick={handleSignIn} href='/' size='small' sx={{my:1}}>
-                          SignIn
+                        <Button variant="contained" color="success" onClick={handleSignUp} href='/signUp' size='small' sx={{my:1}}>
+                          SignUp
                         </Button>
                       </>
                     )}
@@ -171,20 +174,20 @@ export default function Header(props: Props) {
             </Grid>
             <Grid item sm={3.8} md={3.5} lg={3.5} xl={3}>
                 <Grid container spacing={2}>
-                <Grid item sm={2.4} md={3}><Button variant='text' color='inherit' href='https://www.facebook.com/chicagotamilcatholics'><FacebookIcon sx={{display:'inline-block', my:2}} /></Button></Grid>
-                <Grid item sm={2.4} md={3}><Button variant='text' color='inherit' href='https://www.youtube.com/@chicagotamilcatholics'><YouTubeIcon sx={{display:'inline-block', my:2}} /></Button></Grid>
-                <Grid item sm={2.9} md={3}><Button variant='text' color='inherit' href='https://chat.whatsapp.com/HLGO12Uhc4CLYO98UQWc7w'><WhatsAppIcon sx={{display:'inline-block', my:2}} /></Button></Grid>
+                <Grid item sm={2.4} md={3}><Button variant='text' color='inherit' href='https://www.facebook.com/chicagotamilcatholics'><FacebookIcon sx={{display:'inline-block', my:2.5}} /></Button></Grid>
+                <Grid item sm={2.4} md={3}><Button variant='text' color='inherit' href='https://www.youtube.com/@chicagotamilcatholics'><YouTubeIcon sx={{display:'inline-block', my:2.5}} /></Button></Grid>
+                <Grid item sm={2.9} md={3}><Button variant='text' color='inherit' href='https://chat.whatsapp.com/HLGO12Uhc4CLYO98UQWc7w'><WhatsAppIcon sx={{display:'inline-block', my:2.5}} /></Button></Grid>
                 <Grid item sm={2.8} md={3}>
                   {user ? (
                     <>
-                      <Button variant="contained" color="success" onClick={handleLogout} sx={{my:2}}>
+                      <Button variant="contained" color="success" onClick={handleLogout} sx={{my:2.5}}>
                         Logout
                       </Button>
                     </>
                   ) : (
                     <>
-                      <Button variant="contained" color="success" onClick={handleSignIn} sx={{my:2}} href='/'>
-                        SignIn
+                      <Button variant="contained" color="success" onClick={handleSignUp} sx={{my:2.5}} href='/signUp'>
+                        SignUp
                       </Button>
                     </>
                   )}
