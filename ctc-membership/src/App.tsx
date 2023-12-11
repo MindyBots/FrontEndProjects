@@ -1,9 +1,8 @@
 import "./App.css";
 import {
-  createBrowserRouter,
-  createRoutesFromElements,
   Route,
-  RouterProvider,
+  Routes,
+  BrowserRouter as Router,
 } from "react-router-dom";
 import SignUp from "./Pages/SignUp";
 import SignInSide from "./Pages/SignIn";
@@ -16,33 +15,28 @@ import { Toolbar } from "@mui/material";
 import LandingPage from "./LandingPage";
 import ForgotPassword from "./ForgotPassword";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route>
-      <Route path="/" element={<SignInSide />} errorElement={<ErrorPage />} />
-      {/* <Route path="/signin" element={<SignInSide />} /> */}
-      <Route path="/signUp" element={<SignUp />} errorElement={<ErrorPage />} />
-      <Route
-        path="/contactus"
-        element={<Contact />}
-        errorElement={<ErrorPage />}
-      />
-      <Route path="/registrationform" element={<RegistrationForm />} errorElement={<ErrorPage />} />
-      <Route path="/landingpage" element={<LandingPage />} errorElement={<ErrorPage/>} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-    </Route>
-  )
-);
 
 function App() {
   return (
-    <div>
+    <Router>
       <Header />
       <Toolbar /><br></br>
-      <RouterProvider router={router} /> 
+      <Routes>
+        <Route path="/" element={<SignInSide />} errorElement={<ErrorPage />} />
+        {/* <Route path="/signin" element={<SignInSide />} /> */}
+        <Route path="/signUp" element={<SignUp />} errorElement={<ErrorPage />} />
+        <Route
+          path="/contactus"
+          element={<Contact />}
+          errorElement={<ErrorPage />}
+        />
+        <Route path="/registrationform" element={<RegistrationForm />} errorElement={<ErrorPage />} />
+        <Route path="/landingpage" element={<LandingPage />} errorElement={<ErrorPage/>} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+      </Routes>
       <Toolbar />
       <Footer />
-    </div>
+    </Router>
   );
 }
 
