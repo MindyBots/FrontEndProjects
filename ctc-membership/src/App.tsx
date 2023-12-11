@@ -14,11 +14,13 @@ import Footer from "./Footer";
 import { Toolbar } from "@mui/material";
 import LandingPage from "./LandingPage";
 import ForgotPassword from "./ForgotPassword";
+import { AuthProvider } from './AuthProvider';
 
 
 function App() {
   return (
-    <Router>
+   <Router>
+    <AuthProvider>
       <Header />
       <Toolbar /><br></br>
       <Routes>
@@ -36,7 +38,8 @@ function App() {
       </Routes>
       <Toolbar />
       <Footer />
-    </Router>
+    </AuthProvider>
+   </Router>
   );
 }
 
