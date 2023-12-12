@@ -168,7 +168,8 @@ export default function Header(props: Props) {
                           variant="contained"
                           color="success"
                           onClick={handleBothClicks}
-                          sx={{ my: 2.5 }}
+                          sx={{ my: 1 }}
+                          size='small'
                         >
                           {isFirstButton ? 'SignUp' : 'SignIn'}
                         </Button>
