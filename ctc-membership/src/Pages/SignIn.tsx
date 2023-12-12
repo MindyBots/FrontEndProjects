@@ -73,7 +73,7 @@ export default function SignInSide() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: "100vh", width: {md:'830px'} }}>
+      <Grid container component="main" sx={{ width: {md:'850px'} }}>
         <CssBaseline />
         <Grid
           item
@@ -148,27 +148,21 @@ export default function SignInSide() {
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
+                sx={{my:2}}
               />
               <Link to="/forgot-password"><Typography variant="body2">Forgot Password?</Typography></Link>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 5, mb: 2 }}
                 disabled={!isFormValid}
               >
                 Sign In
               </Button>
-              <Grid container>
+              <Grid container sx={{my:2}}>
                 <Grid item xs>
                   <Link to={`signup`}>{"Don't have an account? Sign Up"}</Link>
-                </Grid>
-                <Grid item>
-                  {/* <Button color="primary" size="small" onClick={<SignIn />}>
-                    {"Don't have an account? Sign Up"}
-                  </Button> */}
-
-                  {/* <Link to={"/"}>Forgot password?</Link> */}
                 </Grid>
               </Grid>
               <CopyRightCTC />
