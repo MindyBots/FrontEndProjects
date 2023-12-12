@@ -51,9 +51,8 @@ const ForgotPassword: React.FC = () => {
       <Button variant="contained" color="primary" onClick={handleResetPassword}>
         Reset Password
       </Button>
-      <br /><br />
       {message && (
-        <Typography style={{ marginTop: '20px', color: message.includes('Error') ? 'red' : 'green' }}>
+        <Typography style={{ marginTop: '40px', color: message.includes('Error') ? 'red' : 'green' }}>
           {message}
         </Typography>
       )}
