@@ -106,7 +106,7 @@ export default function SignUp() {
         <Paper elevation={2} style={paperStyle}>
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: 4,
               display: "flex",
               flexDirection: "column",
               alignItems: "center"
@@ -188,7 +188,7 @@ export default function SignUp() {
               </Grid>
             </Box>
           </Box>
-          <CopyRightCTC sx={{ mt: 8, mb: 4 }} />
+          <CopyRightCTC sx={{ mt: 4, mb: 4 }} />
         </Paper>
       </Container>
     </ThemeProvider>
