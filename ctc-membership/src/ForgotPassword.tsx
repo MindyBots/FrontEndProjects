@@ -15,6 +15,7 @@ const firebaseConfig = {
   };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 
 const ForgotPassword: React.FC = () => {
@@ -24,12 +25,11 @@ const ForgotPassword: React.FC = () => {
 
   const handleResetPassword = async () => {
     try {
-      const auth = getAuth(app);
-      await sendPasswordResetEmail(auth, email);
-      setMessage('Password reset email sent. Check your inbox.');
+      // Attempt to send a password reset email
+      await sendPasswordResetEmail(auth,email);
+      setMessage('Password reset email sent successfully. Check your inbox.');
     } catch (error) {
-      setMessage('Error sending reset email. Please try again.');
-      console.error('Error sending reset email', error);
+      setMessage('Error sending password reset email. Please check the email address.');
     }
   };
 
