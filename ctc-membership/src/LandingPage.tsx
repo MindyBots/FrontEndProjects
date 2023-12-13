@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Card, CardContent, Typography, Button} from '@mui/material';
+import { Container, Grid, Card, CardContent, Typography, Button, Toolbar} from '@mui/material';
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from './AuthProvider';
 
@@ -15,8 +15,8 @@ const LandingPage: React.FC = () => {
 
   return (
     <Container>
-        <Grid container spacing={2} justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
-            <Grid item xs={12}>
+        <Grid container spacing={3} justifyContent="center" alignItems="center">
+            <Grid item xs={12} sx={{my:2}}>
             <Card>
                 <CardContent>
                 <Typography variant="h4" gutterBottom>
@@ -35,7 +35,7 @@ const LandingPage: React.FC = () => {
                 </CardContent>
             </Card>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={{my:3}}>
             <Card>
                 <CardContent>
                 <Typography variant="h4" gutterBottom>
@@ -55,6 +55,7 @@ const LandingPage: React.FC = () => {
             </Card>
             </Grid>
         </Grid>
+        <Toolbar />
     </Container>
   );
 };
