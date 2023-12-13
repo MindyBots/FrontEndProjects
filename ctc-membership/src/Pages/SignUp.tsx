@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -47,7 +47,6 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -64,10 +63,8 @@ export default function SignUp() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log('User signed up:', user);
-      setIsFormValid(true);
       navigate('/landingpage')
     } catch (error: any) {
-      setIsFormValid(false);
       console.error('Error signing up:', error.code, error.message);
       handleSignInError(error as AuthError);
     }
@@ -80,24 +77,9 @@ export default function SignUp() {
       setError('Incorrect Email or Password. Please try again.');
     }       
   };
-  
-
-  useEffect(() => {
-    setIsFormValid(email.trim() !== '' && password !== '');
-  }, [email, password]);
 
 
   const paperStyle = { padding: "1vh" };
-
-  // function emailValidation(
-  //   event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ): boolean {
-  //   console.log(event.currentTarget.value);
-  //   const email = event.currentTarget.value;
-  //   const re =
-  //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //   return re.test(email);
-  // }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -178,7 +160,7 @@ export default function SignUp() {
                 <Checkbox value="remember" color='primary' required sx={{display:'inline-block'}} size='medium'/>
                 <Typography variant='body1' sx={{display:'inline-block'}}>I accept the <Link to='#'>Terms and Conditions</Link></Typography>
               </Typography>
-                <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }} disabled={!isFormValid}>
+                <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
                   Sign Up
                 </Button>
               <Grid container justifyContent="center">
