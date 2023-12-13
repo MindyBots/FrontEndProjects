@@ -181,21 +181,21 @@ export default function Header(props: Props) {
           </ThemeProvider>
           <Grid container spacing={2} sx={{ display: { xs: 'none', sm: 'flex' } }}>
             <Grid item sm={0.9} md={0.7} lg={0.7} xl={1.2}>
-                <Button variant='text' color='inherit' href='tel:312-970-0053' sx={{my:2.5, display:'inline-block' }}><CallIcon /></Button>  
-                <Button variant='text' color='inherit' href='tel:312-970-0053' sx={{ display: { sm: 'none', md:'none', lg: 'none', xl: 'inline-block' } }}><Typography>312-970-0053</Typography></Button>
+                <Button variant='text' color='inherit' href='tel:312-970-0053' target="_blank" rel="noopener noreferrer" sx={{my:2.5, display:'inline-block' }}><CallIcon /></Button>  
+                <Button variant='text' color='inherit' href='tel:312-970-0053' target="_blank" rel="noopener noreferrer" sx={{ display: { sm: 'none', md:'none', lg: 'none', xl: 'inline-block' } }}><Typography>312-970-0053</Typography></Button>
             </Grid>
             <Grid item sm={1.2} md={1.7} lg={2} xl={2.1}>
-                <Button variant='text' color='inherit' href='mailto:hello@chicagotamilcatholics.org' sx={{my:2.5, display:'inline-block' }}><EmailIcon /></Button>
-                <Button variant='text' color='inherit' href='mailto:hello@chicagotamilcatholics.org' sx={{textTransform: 'none', display: { sm: 'none', md:'none', lg: 'none', xl:'inline-block'}}}><Typography>hello@chicagotamilcatholics.org</Typography></Button>
+                <Button variant='text' color='inherit' href='mailto:hello@chicagotamilcatholics.org' target="_blank" rel="noopener noreferrer" sx={{my:2.5, display:'inline-block' }}><EmailIcon /></Button>
+                <Button variant='text' color='inherit' href='mailto:hello@chicagotamilcatholics.org' target="_blank" rel="noopener noreferrer" sx={{textTransform: 'none', display: { sm: 'none', md:'none', lg: 'none', xl:'inline-block'}}}><Typography>hello@chicagotamilcatholics.org</Typography></Button>
             </Grid>
             <Grid item sm={6.1} md={5.6} lg={5.1} xl={5}>
                 <img src='src/images/ctclong_logo.webp' alt="Your Image Alt Text" style={{height:'80px'}} />
             </Grid>
             <Grid item sm={3.8} md={3.5} lg={3.5} xl={3}>
                 <Grid container spacing={2}>
-                <Grid item sm={2.4} md={3}><Button variant='text' color='inherit' href='https://www.facebook.com/chicagotamilcatholics'><FacebookIcon sx={{display:'inline-block', my:2.5}} /></Button></Grid>
-                <Grid item sm={2.4} md={3}><Button variant='text' color='inherit' href='https://www.youtube.com/@chicagotamilcatholics'><YouTubeIcon sx={{display:'inline-block', my:2.5}} /></Button></Grid>
-                <Grid item sm={2.9} md={3}><Button variant='text' color='inherit' href='https://chat.whatsapp.com/HLGO12Uhc4CLYO98UQWc7w'><WhatsAppIcon sx={{display:'inline-block', my:2.5}} /></Button></Grid>
+                <Grid item sm={2.4} md={3}><Button variant='text' color='inherit' href='https://www.facebook.com/chicagotamilcatholics' target="_blank" rel="noopener noreferrer"><FacebookIcon sx={{display:'inline-block', my:2.5}} /></Button></Grid>
+                <Grid item sm={2.4} md={3}><Button variant='text' color='inherit' href='https://www.youtube.com/@chicagotamilcatholics' target="_blank" rel="noopener noreferrer"><YouTubeIcon sx={{display:'inline-block', my:2.5}} /></Button></Grid>
+                <Grid item sm={2.9} md={3}><Button variant='text' color='inherit' href='https://chat.whatsapp.com/HLGO12Uhc4CLYO98UQWc7w' target="_blank" rel="noopener noreferrer"><WhatsAppIcon sx={{display:'inline-block', my:2.5}} /></Button></Grid>
                 <Grid item sm={2.8} md={3}>
                   {user ? (
                     <>
