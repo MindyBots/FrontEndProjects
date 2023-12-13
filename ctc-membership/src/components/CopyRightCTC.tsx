@@ -9,7 +9,7 @@ export default function CopyRightCTC(props: any) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://chicagotamilcatholics.org/">
+      <Link color="inherit" href="https://chicagotamilcatholics.org/" target="_blank" rel="noopener noreferrer">
         https://chicagotamilcatholics.org
       </Link>{" "}
       {new Date().getFullYear()}
