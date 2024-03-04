@@ -3,6 +3,7 @@ import { Box, TextField, Button, Select, MenuItem, IconButton, Typography, FormC
 import CloseIcon from '@mui/icons-material/Close';
 import { Person } from '@mui/icons-material';
 
+
 interface Person {
   id: number;
   firstName: string;
@@ -25,7 +26,7 @@ const ShrinkingButton = styled(Button)({
   },
 });
 
-const Member: React.FC = () => {
+export default function Member(){
   const [people, setPeople] = useState<Person[]>([]);
   const [uniqueKey, setUniqueKey] = useState(0);
   const isNameValid = (name: string) => /^[A-Za-z]+$/.test(name);
@@ -150,8 +151,9 @@ const Member: React.FC = () => {
       handleButtonClick();
   };
 
+
   return (
-    <div>
+    <>
       {people.map((person) => (
         <Box key={person.id} sx={{ position: 'relative', marginBottom: 6 }}>
           <IconButton
@@ -164,6 +166,7 @@ const Member: React.FC = () => {
             <Grid container spacing={1}>
               <Grid item xs={12} md={6}>
                 <TextField
+                  required
                   label="First Name"
                   value={person.firstName}
                   onChange={handleTextFieldChange(String(person.id), 'firstName')}
@@ -173,6 +176,7 @@ const Member: React.FC = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
+                  required
                   label="Last Name"
                   value={person.lastName}
                   onChange={handleTextFieldChange(String(person.id), 'lastName')}
@@ -263,8 +267,6 @@ const Member: React.FC = () => {
           </ShrinkingButton>
         </Grid>
       </Grid>
-    </div>
+    </>
   );
 };
-
-export default Member;

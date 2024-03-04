@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Button,
   TextField,
   Typography,
   FormControl,
@@ -14,7 +13,6 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { countries } from 'countries-list';
-import { Link } from 'react-router-dom';
 
 
 export default function Contact(){
@@ -98,138 +96,128 @@ export default function Contact(){
 
     
     return(
-     <>
-        <Typography variant='h6'>Contact Details</Typography>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              margin='normal'
-              label="Email"
-              variant="outlined"
-              value={email}
-              onChange={handleEmailChange}
-              onKeyDown={handleKeyPress}
-              error={Boolean(error2)}
-              helperText={error2}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <FormControl fullWidth margin='normal'>
-              <MuiTelInput label="Phone Number" fullWidth value={value} onChange={handleChange} defaultCountry='US' />
-            </FormControl>
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              margin='normal'
-              label="Address Line 1"
-              variant="outlined"
-              fullWidth
-              type="address"
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              margin='normal'
-              label="Address Line 2"
-              variant="outlined"
-              fullWidth
-              type="address"
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              margin='normal'
-              label='City'
-              value={city}
-              onChange={handleCityChange}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              margin='normal'
-              label='State'
-              value={state}
-              onChange={handleStateChange}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              margin='normal'
-              label="Zip"
-              variant="outlined"
-              fullWidth
-              type="Zip"
-              onChange={handleZipChange}
-              value={zip}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <FormControl fullWidth margin='normal'>
-              <InputLabel id="country-dropdown-label">Select Country</InputLabel>
-              <Select
-                label="Select Country"
-                labelId="country-dropdown-label"
-                id="country-dropdown"
-                onChange={handleCountryChange}
-                defaultValue={defaultCountry}
-              >
-                {Object.entries(countries).map(([code, country]) => (
-                  <MenuItem key={code} value={code}>
-                    {country.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              margin='normal'
-              label="Native Place"
-              variant="outlined"
-              fullWidth
-              value={name}
-              onChange={handleNameChange}
-              inputProps={{
-                pattern: namePattern.source, // Set the regular expression pattern
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <FormControl fullWidth margin='normal'>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
-                  label="Membership Since"
-                  slotProps={{ textField: { size: 'medium' } }}
-                  views={['year']}
-                />
-              </LocalizationProvider>
-            </FormControl>
-          </Grid>
-        </Grid>
-        <br></br>
-        <Link to={"/"}>
-          <Button
-            type="submit"
+    <>
+      <Typography variant='h6'>Contact Details</Typography>
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={6}>
+          <TextField
+            required
             fullWidth
-            variant="contained"
-            color="primary"
-            sx={{my:2}}
-          >
-            Register
-          </Button>
-        </Link>
+            margin='normal'
+            label="Email"
+            variant="outlined"
+            value={email}
+            onChange={handleEmailChange}
+            onKeyDown={handleKeyPress}
+            error={Boolean(error2)}
+            helperText={error2}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <FormControl fullWidth margin='normal'>
+            <MuiTelInput label="Phone Number" fullWidth value={value} onChange={handleChange} defaultCountry='US'/>
+          </FormControl>
+        </Grid>
+      </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={6}>
+          <TextField
+            margin='normal'
+            label="Address Line 1"
+            variant="outlined"
+            fullWidth
+            type="address"
+            required
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            margin='normal'
+            label="Address Line 2"
+            variant="outlined"
+            fullWidth
+            type="address"
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            margin='normal'
+            label='City'
+            value={city}
+            onChange={handleCityChange}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            margin='normal'
+            label='State'
+            value={state}
+            onChange={handleStateChange}
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={6}>
+          <TextField
+            margin='normal'
+            label="Zip"
+            variant="outlined"
+            fullWidth
+            type="Zip"
+            onChange={handleZipChange}
+            value={zip}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <FormControl fullWidth margin='normal'>
+            <InputLabel id="country-dropdown-label">Select Country</InputLabel>
+            <Select
+              label="Select Country"
+              labelId="country-dropdown-label"
+              id="country-dropdown"
+              onChange={handleCountryChange}
+              defaultValue={defaultCountry}
+            >
+              {Object.entries(countries).map(([code, country]) => (
+                <MenuItem key={code} value={code}>
+                  {country.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={6}>
+          <TextField
+            margin='normal'
+            label="Native Place"
+            variant="outlined"
+            fullWidth
+            value={name}
+            onChange={handleNameChange}
+            inputProps={{
+              pattern: namePattern.source, // Set the regular expression pattern
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <FormControl fullWidth margin='normal'>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                label="Membership Since"
+                slotProps={{ textField: { size: 'medium' } }}
+                views={['year']}
+              />
+            </LocalizationProvider>
+          </FormControl>
+        </Grid>
+      </Grid>
+      <br></br>
     </>
     );
 }

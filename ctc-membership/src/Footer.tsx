@@ -36,13 +36,13 @@ const Footer: React.FC = () => {
         </Typography>
         <br></br>
         <ThemeProvider theme={outerTheme}>
-          <Button sx={{bgcolor:'#3b5999', mr:2}} variant='contained' href='https://www.facebook.com/chicagotamilcatholics' color='primary'>
+          <Button sx={{bgcolor:'#3b5999', mr:2}} variant='contained' href='https://www.facebook.com/chicagotamilcatholics' color='primary' target="_blank" rel="noopener noreferrer">
             <FacebookIcon sx={{color:'#ffffff'}} />
           </Button>
-          <Button sx={{bgcolor:'#cd201f', mr:2}} variant='contained' href='https://www.youtube.com/@chicagotamilcatholics' color='primary'>
+          <Button sx={{bgcolor:'#cd201f', mr:2}} variant='contained' href='https://www.youtube.com/@chicagotamilcatholics' color='primary' target="_blank" rel="noopener noreferrer">
             <YouTubeIcon sx={{color:'#ffffff'}} />
           </Button>
-          <Button sx={{bgcolor:'#2bb140'}} variant='contained' href='https://chat.whatsapp.com/HLGO12Uhc4CLYO98UQWc7w' color='primary'>
+          <Button sx={{bgcolor:'#2bb140'}} variant='contained' href='https://chat.whatsapp.com/HLGO12Uhc4CLYO98UQWc7w' color='primary' target="_blank" rel="noopener noreferrer">
             <WhatsAppIcon sx={{color:'#ffffff'}} />
           </Button>
         </ThemeProvider>

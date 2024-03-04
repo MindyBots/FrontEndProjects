@@ -1,7 +1,6 @@
-import * as React from "react";
+import React, { useState } from 'react';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import {
   Paper,
   Checkbox,
@@ -11,23 +10,48 @@ import {
   CssBaseline,
   TextField,
   Grid,
-  FormControlLabel,
+  FormControl,
   Typography,
-  Container,
-  Stack,
+  Container
 } from "@mui/material";
 import PasswordField from "../components/PasswordField";
 import CopyRightCTC from "../components/CopyRightCTC";
 import EmailField from "../components/EmailField";
+import { createUserWithEmailAndPassword, getAuth, AuthError } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB4nDQAhRmAbX9qW1-MsaZJtw8JlyTa7Qw",
+  authDomain: "chicagotamilcatholics-6f433.firebaseapp.com",
+  projectId: "chicagotamilcatholics-6f433",
+  storageBucket: "chicagotamilcatholics-6f433.appspot.com",
+  messagingSenderId: "160168855788",
+  appId: "1:160168855788:web:75136e333a89160fd47dc9",
+  measurementId: "G-F0BZLVYY89"
+};
+
+const auth = getAuth(initializeApp(firebaseConfig));
+
+if (!auth) {
+  throw new Error('Firebase authentication not initialized!');
+}
+
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const [error, setError] = React.useState<string | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log(data);
+    setError(null);
 
     //const { password, confirmPassword } = event.currentTarget.elements;
     if (password !== confirmPassword) {
@@ -35,37 +59,39 @@ export default function SignUp() {
       return;
     }
 
-    console.log({
-      email: data.get("email"),
-      Password: password,
-    });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log('User signed up:', user);
+      navigate('/landingpage')
+    } catch (error: any) {
+      console.error('Error signing up:', error.code, error.message);
+      handleSignInError(error as AuthError);
+    }
+  }    
+
+  const handleSignInError = (error: AuthError) => {
+    if (error.code === 'auth/email-already-in-use') {
+      setError('Email is already in use');
+    } else {
+      setError('Incorrect Email or Password. Please try again.');
+    }       
   };
 
-  const paperStyle = { padding: "2vh" };
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
 
-  // function emailValidation(
-  //   event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ): boolean {
-  //   console.log(event.currentTarget.value);
-  //   const email = event.currentTarget.value;
-  //   const re =
-  //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //   return re.test(email);
-  // }
+  const paperStyle = { padding: "1vh" };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="sm">
+      <Container component="main" maxWidth="md" sx={{width: {md:'900px'}}}>
         <CssBaseline />
         <Paper elevation={2} style={paperStyle}>
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: 4,
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <Avatar
@@ -79,61 +105,72 @@ export default function SignUp() {
               component="form"
               onSubmit={handleSubmit}
               //noValidate
-              sx={{ mt: 1, p: 2 }}
+              sx={{ mt: 1, p: 2, width: {md:'800px'} }}
             >
-              <Stack spacing={1} direction={"row"} margin={1}>
-                <TextField
-                  required
-                  id="firstName"
-                  label="First Name"
-                  name="firstName"
-                  autoComplete="firstName"
-                  fullWidth
-                />
-                <TextField
-                  required
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lastName"
-                  fullWidth
-                />
-              </Stack>
+              <Grid container spacing={1}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="firstName"
+                    label="First Name"
+                    name="firstName"
+                    autoComplete="firstName"
+                    fullWidth
+                    margin='normal'
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="lastName"
+                    fullWidth
+                    margin='normal'
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <EmailField setEmail={setEmail} />
+                </Grid>
+                <Grid item xs={12} sx={{my:2}}>
+                  <PasswordField
+                    id="password"
+                    label="Password"
+                    passwordValue={setPassword}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <PasswordField
+                    id="confirmpassword"
+                    label="Confirm Password"
+                    passwordValue={setConfirmPassword}             
+                  />
+                </Grid>
+              </Grid>
+              {error && (
+                <FormControl margin="normal" fullWidth>
+                  <Typography variant="body2" color="error" align="center">
+                    {error}
+                  </Typography>
+                </FormControl>
+              )}
 
-              <Stack spacing={1} direction={"column"} width={350} margin={1}>
-                <EmailField />
-                <PasswordField
-                  id="password"
-                  label="Password"
-                  passwordValue={setPassword}
-                />
-                <PasswordField
-                  id="confirmpassword"
-                  label="Confirm Password"
-                  passwordValue={setConfirmPassword}
-                  
-                />
-              </Stack>
-
-              <Typography variant="h6">
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="I Accept the"
-                />
-                <Link to="#">Terms and Conditions</Link>
+              <Typography variant="h6" justifyContent="center">
+                <Checkbox value="remember" color='primary' required sx={{display:'inline-block'}} size='medium'/>
+                <Typography variant='body1' sx={{display:'inline-block'}}>I accept the <Link to='#'>Terms and Conditions</Link></Typography>
               </Typography>
-
-              <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
-                Sign Up
-              </Button>
-              <Grid container justifyContent="flex-end">
+                <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+                  Sign Up
+                </Button>
+              <Grid container justifyContent="center">
                 <Grid item>
                   <Link to={`../`}>Already have an account? Sign in</Link>
                 </Grid>
               </Grid>
             </Box>
           </Box>
-          <CopyRightCTC sx={{ mt: 8, mb: 4 }} />
+          <CopyRightCTC sx={{ mt: 4, mb: 4 }} />
         </Paper>
       </Container>
     </ThemeProvider>

@@ -43,7 +43,6 @@ export default function PasswordField(props: Props) {
     <Box>
       <FormControl
         variant="outlined"
-        margin="normal"
         required
         fullWidth
         id={props.id}

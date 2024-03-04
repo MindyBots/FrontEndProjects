@@ -1,19 +1,23 @@
-import { TextField } from "@mui/material";
-import React from "react";
+import { TextField } from '@mui/material';
+import React from 'react';
 
-export default function EmailField() {
-  const [email, setEmail] = React.useState("");
-  const [error, setError] = React.useState("");
+interface EmailFieldProps {
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function EmailField({ setEmail }: EmailFieldProps) {
+  const [email, setEmailValue] = React.useState('');
+  const [error, setError] = React.useState('');
 
   const validateEmail = (input: string) => {
-    // Regular expression for a valid email address
-    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    const emailRegex =
+      /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
     if (!emailRegex.test(input)) {
-      return "Invalid email address";
+      return 'Invalid email address';
     }
 
-    return "";
+    return '';
   };
 
   const handleEmailChange = (
@@ -22,7 +26,8 @@ export default function EmailField() {
     const inputEmail = event.currentTarget.value;
     const errorMessage = validateEmail(inputEmail);
     setError(errorMessage);
-    setEmail(inputEmail);
+    setEmailValue(inputEmail);
+    setEmail(inputEmail); // Set email in the parent component
   };
 
   const handleOnBlur = (
@@ -32,7 +37,7 @@ export default function EmailField() {
 
     if (!error) {
       // Do something with the valid email address
-      console.log("Valid email:", email);
+      console.log('Valid email:', email);
     }
   };
 
@@ -47,6 +52,7 @@ export default function EmailField() {
       error={Boolean(error)}
       helperText={error}
       onBlur={handleOnBlur}
+      margin="normal"
     />
   );
 }
